@@ -1,5 +1,6 @@
 let pays = [];
 let dates = [];
+let data = [];
 
 document.getElementById( 'table1' )
     .querySelectorAll( 'tr td:nth-child( 2 )' )
@@ -95,22 +96,19 @@ document.getElementById( 'table1' )
     } );
     dates.push( date );
 
-pays.forEach( element => {
-    element += { 2002 : dates[pays.indexOf(element)] }
-    element += { 2003 : dates[pays.indexOf(element)] }
-    element += { 2004 : dates[pays.indexOf(element)] }
-    element += { 2005 : dates[pays.indexOf(element)] }
-    element += { 2006 : dates[pays.indexOf(element)] }
-    element += { 2007 : dates[pays.indexOf(element)] }
-    element += { 2008 : dates[pays.indexOf(element)] }
-    element += { 2009 : dates[pays.indexOf(element)] }
-    element += { 2010 : dates[pays.indexOf(element)] }
-    element += { 2011 : dates[pays.indexOf(element)] }
-    element += { 2012 : dates[pays.indexOf(element)] }
-} );
 
-console.log(pays);
+console.log(pays, dates);
 
+pays.forEach(element => {
+    
+    // data[pays.indexOf(element)].push(element);
+    data.push(element);
+    dates.forEach(e => {
+        data.push(e[pays.indexOf(element)]);
+    });
+});
+
+console.log(data);
 
 /* 
 let text = '{"employees":[' +
