@@ -1,121 +1,63 @@
-let pays = [];
-let dates = [];
+import { Chart } from 'chart.js';
+
 let data = [];
+let passedData = [];
 
+// get data
 document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 2 )' )
+    .querySelectorAll( 'tr > td' )
     .forEach( element => {
-        pays.push( element.textContent );
+        data.push( element.textContent );
     } );
 
-let date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 3 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
+// sort data by country
+for (let i = 0 ; i < data.length ; i += 12) {
+    passedData[i] = [];
+    for (let j = 0 ; j < 12 ; j++) {
+        passedData[i].push(data[ i+j ]);
+    }
+}
 
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 4 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 5 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 6 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 7 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 8 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 9 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 10 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 11 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 12 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
-
-date = [];
-document.getElementById( 'table1' )
-    .querySelectorAll( 'tr td:nth-child( 13 )' )
-    .forEach( element => {
-        date.push( element.textContent );
-    } );
-    dates.push( date );
+//Chart table1
+let chart1 = document.createElement('canvas');
+chart1.setAttribute("id","chartTable1");
+chart1.setAttribute("width","700");
+chart1.setAttribute("height","350");
+document.getElementById("Crimes_et_d.C3.A9lits_enregistr.C3.A9s_par_les_services_de_police").appendChild(chart1);
 
 
-console.log(pays, dates);
-
-pays.forEach(element => {
-    
-    // data[pays.indexOf(element)].push(element);
-    data.push(element);
-    dates.forEach(e => {
-        data.push(e[pays.indexOf(element)]);
-    });
-});
-
-console.log(data);
-
-/* 
-let text = '{"employees":[' +
-'{"firstName":"John","lastName":"Doe" },' +
-'{"firstName":"Anna","lastName":"Smith" },' +
-'{"firstName":"Peter","lastName":"Jones" }]}';
-
-const obj = JSON.parse(text);
-document.getElementById("demo").innerHTML =
-obj.employees[1].firstName + " " + obj.employees[1].lastName; */
+/* const ctx = document.getElementById('chartTable1').getContext('2d');
+const chartTable1 = new chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+}); */
