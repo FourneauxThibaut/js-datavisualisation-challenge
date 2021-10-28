@@ -1,63 +1,83 @@
-import { Chart } from 'chart.js';
-
-let data = [];
-let passedData = [];
+const allData = [];
+const countryName = [];
+const CountryData = [];
+const year = [];
 
 // get data
 document.getElementById( 'table1' )
     .querySelectorAll( 'tr > td' )
-    .forEach( element => {
-        data.push( element.textContent );
-    } );
+    .forEach( element => { allData.push( element.textContent ) } );
+console.log(allData);
 
 // sort data by country
-for (let i = 0 ; i < data.length ; i += 12) {
-    passedData[i] = [];
+for (let i = 0 ; i < allData.length ; i += 12) {
+    CountryData[i] = [];
     for (let j = 0 ; j < 12 ; j++) {
-        passedData[i].push(data[ i+j ]);
+        CountryData[i].push(allData[ i+j ]);
     }
 }
+console.log(CountryData);
+
+// sort country name out of the datalist
+CountryData.forEach(element => {
+    countryName.push(element[0]);
+    element.shift();
+});
+console.log(countryName);
+
+// sort labels
+document.getElementById( 'table1' )
+    .querySelectorAll( 'tr > th' )
+    .forEach( element => {
+        year.push( element.textContent );
+    } );
+year.splice(0, 5);
+year.splice(11, 45);
+console.log(year);
 
 //Chart table1
 let chart1 = document.createElement('canvas');
 chart1.setAttribute("id","chartTable1");
-chart1.setAttribute("width","700");
-chart1.setAttribute("height","350");
+chart1.style.width = "100%"
 document.getElementById("Crimes_et_d.C3.A9lits_enregistr.C3.A9s_par_les_services_de_police").appendChild(chart1);
 
 
-/* const ctx = document.getElementById('chartTable1').getContext('2d');
-const chartTable1 = new chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
+
+
+
+
+
+const ctx = document.getElementById('chartTable1').getContext('2d');
+
+const data = {
+    label: year,
+    datasets: [
+        {
+            data: CountryData[0],
+            label: countryName[0],
+            backgroundColor: '#FF9100',
+            borderColor: '#FFEBD1',
+            tension: 0.3,
+        },
+        {
+            data: CountryData[1],
+            label: countryName[1],
+            backgroundColor: '#3352ff',
+            borderColor: '#5386c8',
+            tension: 0.3,
+        },
+    ],
+};
+
+const config = {
+    type: 'line',
+    data: data,
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-}); */
+        radius: 6,
+        hitRadius: 20,
+        hoverRadius: 8,
+        responsive: true,
+    },
+};
+
+const myChart = new Chart(ctx, config);
